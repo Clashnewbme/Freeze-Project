@@ -137,7 +137,7 @@ void shell(){
         print("> ");
         get_input(buf);
         if(strcmp(buf,"help")){
-            print("Commands: help clear about echo ls cat mem uname version reboot\n");
+            print("Commands: help, clear, about, echo, ls, cat, mem, uname, version, reboot\n");
         } else if(strcmp(buf,"clear")){
             clear();
         } else if(strcmp(buf,"about")){
