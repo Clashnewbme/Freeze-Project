@@ -1,11 +1,5 @@
 
-Freeze OS v3
-
-Features:
-- Real keyboard input (basic scancode read)
-- Interactive shell
-- Commands: help, clear, about
-- VGA text mode output
+Freeze Project
 
 Build:
 gcc -ffreestanding -m32 -c kernel.c -o kernel.o
