@@ -130,40 +130,173 @@ void print_hex(unsigned int v){
 
 int startswith(const char* s,const char* p){ int i=0; while(p[i]){ if(s[i]!=p[i]) return 0; i++; } return 1; }
 
+// helper that executes a single command string (no prompt)
+void handle_command(char *buf){
+    if(strcmp(buf,"help")){
+        print("=== SYSTEM ===\n");
+        print("uname, uptime, date, id, who, ps, top, lsmod, dmesg, systemctl, shutdown\n");
+        print("=== TEXT ===\n");
+        print("cat, echo, grep, sed, awk, wc, head, tail, more, less\n");
+        print("=== FILE ===\n");
+        print("ls, pwd, file, stat, chmod, chown, ln, mount, umount, df, du\n");
+        print("=== PROCESS ===\n");
+        print("kill, bg, fg, jobs, wait, exit, sleep\n");
+        print("=== USER ===\n");
+        print("useradd, userdel, passwd, groups, sudo\n");
+        print("=== NETWORK ===\n");
+        print("ifconfig, ping, ssh, scp, netstat, curl, wget\n");
+        print("=== DEV ===\n");
+        print("gcc, make, git, bash, sh, man, which, whereis\n");
+        print("=== OTHER ===\n");
+        print("clear, about, version, info, test, reboot, true, false\n");
+    } else if(strcmp(buf,"clear")){
+        clear();
+    } else if(strcmp(buf,"about")){
+        print("Freeze Project v0.50\n");
+    } else if(strcmp(buf,"version")){
+        print("Freeze Project 0.5\n");
+    } else if(strcmp(buf,"uname")){
+        print("Freeze Project 0.5, SMP i386 GNU\n");
+    } else if(strcmp(buf,"uptime")){
+        print("05:00:00 up 12 days, 3:45, 1 user, load average: 0.15, 0.10, 0.08\n");
+    } else if(strcmp(buf,"date")){
+        print("Wed Feb 26 05:00:00 UTC 2026\n");
+    } else if(strcmp(buf,"id")){
+        print("uid=0(root) gid=0(root) groups=0(root),4(adm),27(sudo)\n");
+    } else if(strcmp(buf,"who")){
+        print("root     pts/0        2026-02-26 05:00 (:0)\n");
+    } else if(strcmp(buf,"ps")){
+        print("PID USER COMMAND\n1   root kernel\n2   root systemd\n");
+    } else if(strcmp(buf,"top")){
+        print("PID %%CPU %%MEM COMMAND\n1   5.2  12.5 kernel\n2   1.1  8.3  systemd\n");
+    } else if(strcmp(buf,"lsmod")){
+        print("Module       Size\nserial_core  2048\n");
+    } else if(strcmp(buf,"dmesg")){
+        print("[0.000000] Booting Freeze Project v4\n[0.001000] VGA buffer initialized\n");
+    } else if(strcmp(buf,"systemctl")){
+        print("Usage: systemctl [start|stop|status|restart] <service>\n");
+    } else if(strcmp(buf,"shutdown")){
+        print("Shutting down...\n"); outb(0x64,0xFE); for(;;);
+    } else if(strcmp(buf,"ls")){
+        print("boot/  kernel.bin  grub/  README.md\n");
+    } else if(strcmp(buf,"pwd")){
+        print("/root\n");
+    } else if(strcmp(buf,"file")){
+        print("kernel.bin: ELF 32-bit LSB executable\n");
+    } else if(strcmp(buf,"stat")){
+        print("File: kernel.bin Size: 10144 Blocks: 20 Inode: 12345\n");
+    } else if(strcmp(buf,"chmod")){
+        print("File permissions changed\n");
+    } else if(strcmp(buf,"chown")){
+        print("File owner changed\n");
+    } else if(strcmp(buf,"ln")){
+        print("Creating symlink...\n");
+    } else if(strcmp(buf,"mount")){
+        print("/ on /dev/sda1 type ext4\n");
+    } else if(strcmp(buf,"umount")){
+        print("Unmounting filesystem...\n");
+    } else if(strcmp(buf,"df")){
+        print("Filesystem Size Used Avail %%Use Mounted on\n/dev/sda1 10G  2G   8G   20%  /\n");
+    } else if(strcmp(buf,"du")){
+        print("4.1M  .\n");
+    } else if(strcmp(buf,"cat")){
+        print("Usage: cat <file>\n");
+    } else if(startswith(buf,"cat ")){
+        print("Cannot read file: no filesystem\n");
+    } else if(strcmp(buf,"echo")){
+        print("Type something:\n"); get_input(buf); print(buf); putc('\n');
+    } else if(startswith(buf,"echo ")){
+        print(buf + 5); putc('\n');
+    } else if(strcmp(buf,"grep")){
+        print("Usage: grep <pattern> <file>\n");
+    } else if(strcmp(buf,"sed")){
+        print("Usage: sed 's/old/new/' <file>\n");
+    } else if(strcmp(buf,"awk")){
+        print("Usage: awk '{print $1}' <file>\n");
+    } else if(strcmp(buf,"wc")){
+        print("Usage: wc [lines] [words] [chars] <file>\n");
+    } else if(strcmp(buf,"head")){
+        print("Usage: head -n <lines> <file>\n");
+    } else if(strcmp(buf,"tail")){
+        print("Usage: tail -n <lines> <file>\n");
+    } else if(strcmp(buf,"more") || strcmp(buf,"less")){
+        print("Usage: more <file>\n");
+    } else if(strcmp(buf,"kill")){
+        print("Usage: kill <pid>\n");
+    } else if(strcmp(buf,"bg")){
+        print("No background jobs\n");
+    } else if(strcmp(buf,"fg")){
+        print("No foreground jobs\n");
+    } else if(strcmp(buf,"jobs")){
+        print("No jobs\n");
+    } else if(strcmp(buf,"wait")){
+        print("Waiting for child process...\n");
+    } else if(strcmp(buf,"sleep")){
+        print("Sleeping...\n");
+    } else if(strcmp(buf,"exit")){
+        print("Exiting shell\n");
+    } else if(strcmp(buf,"useradd")){
+        print("Usage: useradd <username>\n");
+    } else if(strcmp(buf,"userdel")){
+        print("Usage: userdel <username>\n");
+    } else if(strcmp(buf,"passwd")){
+        print("Changing password...\n");
+    } else if(strcmp(buf,"groups")){
+        print("root adm sudo\n");
+    } else if(strcmp(buf,"ifconfig")){
+        print("lo: 127.0.0.1 netmask 255.0.0.0\neth0: 192.168.1.100 netmask 255.255.255.0\n");
+    } else if(strcmp(buf,"ping")){
+        print("ping: ICMP echo request not implemented\n");
+    } else if(strcmp(buf,"ssh")){
+        print("Usage: ssh <host>\n");
+    } else if(strcmp(buf,"scp")){
+        print("Usage: scp <file> <host>:<path>\n");
+    } else if(strcmp(buf,"netstat")){
+        print("Active Internet connections\nProto Local Address Foreign Address State\n");
+    } else if(strcmp(buf,"curl") || strcmp(buf,"wget")){
+        print("HTTP client not available\n");
+    } else if(strcmp(buf,"gcc")){
+        print("gcc (Freeze Project 0.50)\n");
+    } else if(strcmp(buf,"make")){
+        print("GNU Make 4.3\n");
+    } else if(strcmp(buf,"git")){
+        print("git version 2.34.1\n");
+    } else if(strcmp(buf,"bash")){
+        print("GNU bash, version 5.1.0\n");
+    } else if(strcmp(buf,"sh")){
+        print("POSIX shell\n");
+    } else if(strcmp(buf,"man")){
+        print("Manual page: see 'help' for available commands\n");
+    } else if(strcmp(buf,"which")){
+        print("Usage: which <command>\n");
+    } else if(strcmp(buf,"whereis")){
+        print("Usage: whereis <command>\n");
+    } else if(strcmp(buf,"true")){
+        print("\n");
+    } else if(strcmp(buf,"false")){
+        print("\n");
+    } else if(strcmp(buf,"info") || strcmp(buf,"kernel") || strcmp(buf,"test")){
+        print("Freeze OS v4 - Advanced Kernel Shell\n");
+        print("Compiled with embedded 50+ Unix commands\n");
+    } else if(strcmp(buf,"reboot")){
+        print("Rebooting...\n"); outb(0x64,0xFE); for(;;);
+    } else {
+        print("Command not found. Type 'help' for available commands.\n");
+    }
+}
+
 // SHELL
 void shell(){
     char buf[128];
     while(1){
         print("> ");
         get_input(buf);
-        if(strcmp(buf,"help")){
-            print("Commands: help, clear, about, echo, ls, cat, mem, uname, version, reboot\n");
-        } else if(strcmp(buf,"clear")){
-            clear();
-        } else if(strcmp(buf,"about")){
-            print("Freeze OS v4\n");
-        } else if(strcmp(buf,"ls")){
-            print("kernel.bin\nboot/grub/grub.cfg\n");
-        } else if(startswith(buf,"cat ")){
-            char* fname = buf + 4;
-            print("No filesystem: "); print(fname); putc('\n');
-        } else if(strcmp(buf,"cat")){
-            print("Usage: cat <file>\n");
-        } else if(strcmp(buf,"mem")){
-            print("BSS start: "); print_hex((unsigned int)&__bss_start); putc('\n');
-            print("BSS end:   "); print_hex((unsigned int)&__bss_end); putc('\n');
-        } else if(strcmp(buf,"uname")){
-            print("FreezeOS v4 (i386)\n");
-        } else if(strcmp(buf,"version")){
-            print("FreezeOS version 0.4\n");
-        } else if(strcmp(buf,"reboot")){
-            print("Rebooting...\n"); outb(0x64,0xFE); for(;;); }
-        else if(startswith(buf,"echo ")){
-            print(buf + 5); putc('\n');
-        } else if(strcmp(buf,"echo")){
-            print("Type something:\n"); get_input(buf); print(buf); putc('\n');
+        if(startswith(buf,"sudo ")){
+            print("[sudo] ");
+            char *rest = buf + 5;
+            handle_command(rest);
         } else {
-            print("Unknown command\n");
+            handle_command(buf);
         }
     }
 }
@@ -171,8 +304,8 @@ void shell(){
 // ENTRY POINT
 void kernel_main(void){
     clear();
-    print("Freeze OS v4\n");
+    print("Freeze Project v0.50\n");
     print("Welcome!\n");
-    print("Type 'help'\n\n");
+    print("Type 'help' for available commands\n\n");
     shell();
 }
