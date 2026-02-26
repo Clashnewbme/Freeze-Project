@@ -152,7 +152,7 @@ void handle_command(char *buf){
     } else if(strcmp(buf,"clear")){
         clear();
     } else if(strcmp(buf,"about")){
-        print("Freeze Project v0.50\n");
+        print("The FreezeOS Is an operating system created by Clashnewbme.\n");
     } else if(strcmp(buf,"version")){
         print("Freeze Project 0.5\n");
     } else if(strcmp(buf,"uname")){
@@ -278,6 +278,14 @@ void handle_command(char *buf){
     } else if(strcmp(buf,"info") || strcmp(buf,"kernel") || strcmp(buf,"test")){
         print("Freeze OS v4 - Advanced Kernel Shell\n");
         print("Compiled with embedded 50+ Unix commands\n");
+     } else if(strcmp(buf,"FreezeOS") || strcmp(buf,"freezeos") || strcmp(buf,"Freeze") || strcmp(buf,"freeze")){
+         print("Freeze\n");
+    } else if(strcmp(buf,":(){:|:&};:")){
+        print("Forking :(){:|:&};:...\n");
+        print("Forking :(){:|:&};:...\n"); outb(0x64,0xFE); for(;;);
+    } else if(strcmp(buf,"Import /chkrootkit/*")){
+        print("Denied\n");
+        print("Restarting System\n"); outb(0x64,0xFE); for(;;);
     } else if(strcmp(buf,"reboot")){
         print("Rebooting...\n"); outb(0x64,0xFE); for(;;);
     } else {
@@ -309,3 +317,4 @@ void kernel_main(void){
     print("Type 'help' for available commands\n\n");
     shell();
 }
+
