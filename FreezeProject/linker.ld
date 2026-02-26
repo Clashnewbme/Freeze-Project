@@ -1,9 +1,28 @@
+ENTRY(_start)
 
-ENTRY(kernel_main)
 SECTIONS {
- . = 1M;
- .text : { *(.text) }
- .rodata : { *(.rodata) }
- .data : { *(.data) }
- .bss : { *(.bss) }
+    . = 1M;
+
+    .multiboot : {
+        *(.multiboot)
+    }
+
+    .text : {
+        *(.text*)
+    }
+
+    .rodata : {
+        *(.rodata*)
+    }
+
+    .data : {
+        *(.data*)
+    }
+
+    /* mark start of BSS */
+    __bss_start = .;
+    .bss : {
+        *(.bss*)
+    }
+    __bss_end = .;
 }
