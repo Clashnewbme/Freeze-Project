@@ -111,8 +111,15 @@ void get_input(char* buffer){
     }
 }
 
-// simple strcmp
-int strcmp(const char* a,const char* b){ int i=0; while(a[i] && b[i]){ if(a[i]!=b[i]) return 0; i++; } return a[i]==b[i]; }
+// simple strcmp (fixed)
+int strcmp(const char* a,const char* b){
+    int i=0;
+    while(a[i] && b[i]){
+        if(a[i]!=b[i]) return 0;
+        i++;
+    }
+    return a[i]==b[i];
+}
 
 /* expose bss symbols from linker */
 extern unsigned char __bss_start;
@@ -132,7 +139,7 @@ int startswith(const char* s,const char* p){ int i=0; while(p[i]){ if(s[i]!=p[i]
 
 // helper that executes a single command string (no prompt)
 void handle_command(char *buf){
-    if(strcmp(buf,"help")){
+    if(strcmp(buf,"help")==1){
         print("=== SYSTEM ===\n");
         print("uname, uptime, date, id, who, ps, top, lsmod, dmesg, systemctl, shutdown\n");
         print("=== TEXT ===\n");
@@ -149,150 +156,150 @@ void handle_command(char *buf){
         print("gcc, make, git, bash, sh, man, which, whereis\n");
         print("=== OTHER ===\n");
         print("clear, about, version, info, test, reboot, true, false\n");
-    } else if(strcmp(buf,"clear")){
+    } else if(strcmp(buf,"clear")==1){
         clear();
-    } else if(strcmp(buf,"-r")){
+    } else if(strcmp(buf,"-r")==1){
         print("Safety implementations deny this action.\n");
         print_hex((unsigned int)&__bss_start); print(" - "); print_hex((unsigned int)&__bss_end); print("\n");
-    } else if(strcmp(buf,"about")){
+    } else if(strcmp(buf,"about")==1){
         print("The FreezeOS Is an operating system created by Clashnewbme.\n");
-    } else if(strcmp(buf,"fork while forking")){
-         print("Forking while forking...\n");
-         print("Forking while forking...\n"); outb(0x64,0xFE); for(;;);
-    } else if(strcmp(buf,"version")){
+    } else if(strcmp(buf,"fork while forking")==1){
+        print("Forking while forking...\n");
+        print("Forking while forking...\n"); outb(0x64,0xFE); for(;;);
+    } else if(strcmp(buf,"version")==1){
         print("Freeze Project 0.5\n");
-    } else if(strcmp(buf,"uname")){
+    } else if(strcmp(buf,"uname")==1){
         print("Freeze Project 0.5, SMP i386 GNU\n");
-    } else if(strcmp(buf,"uptime")){
+    } else if(strcmp(buf,"uptime")==1){
         print("05:00:00 up 12 days, 3:45, 1 user, load average: 0.15, 0.10, 0.08\n");
-    } else if(strcmp(buf,"date")){
+    } else if(strcmp(buf,"date")==1){
         print("Wed Feb 26 05:00:00 UTC 2026\n");
-    } else if(strcmp(buf,"id")){
+    } else if(strcmp(buf,"id")==1){
         print("uid=0(root) gid=0(root) groups=0(root),4(adm),27(sudo)\n");
-    } else if(strcmp(buf,"who")){
+    } else if(strcmp(buf,"who")==1){
         print("root     pts/0        2026-02-26 05:00 (:0)\n");
-    } else if(strcmp(buf,"ps")){
+    } else if(strcmp(buf,"ps")==1){
         print("PID USER COMMAND\n1   root kernel\n2   root systemd\n");
-    } else if(strcmp(buf,"top")){
+    } else if(strcmp(buf,"top")==1){
         print("PID %%CPU %%MEM COMMAND\n1   5.2  12.5 kernel\n2   1.1  8.3  systemd\n");
-    } else if(strcmp(buf,"lsmod")){
+    } else if(strcmp(buf,"lsmod")==1){
         print("Module       Size\nserial_core  2048\n");
-    } else if(strcmp(buf,"dmesg")){
-        print("[0.000000] Booting Freeze Project v4\n[0.001000] VGA buffer initialized\n");
-    } else if(strcmp(buf,"systemctl")){
+    } else if(strcmp(buf,"dmesg")==1){
+        print("[0.000000] Booting Freeze Project v0.5\n[0.001000] VGA buffer initialized\n");
+    } else if(strcmp(buf,"systemctl")==1){
         print("Usage: systemctl [start|stop|status|restart] <service>\n");
-    } else if(strcmp(buf,"shutdown")){
+    } else if(strcmp(buf,"shutdown")==1){
         print("Shutting down...\n"); outb(0x64,0xFE); for(;;);
-    } else if(strcmp(buf,"ls")){
+    } else if(strcmp(buf,"ls")==1){
         print("boot/  kernel.bin  grub/  README.md\n");
-    } else if(strcmp(buf,"pwd")){
+    } else if(strcmp(buf,"pwd")==1){
         print("/root\n");
-    } else if(strcmp(buf,"file")){
+    } else if(strcmp(buf,"file")==1){
         print("kernel.bin: ELF 32-bit LSB executable\n");
-    } else if(strcmp(buf,"stat")){
+    } else if(strcmp(buf,"stat")==1){
         print("File: kernel.bin Size: 10144 Blocks: 20 Inode: 12345\n");
-    } else if(strcmp(buf,"chmod")){
+    } else if(strcmp(buf,"chmod")==1){
         print("File permissions changed\n");
-    } else if(strcmp(buf,"chown")){
+    } else if(strcmp(buf,"chown")==1){
         print("File owner changed\n");
-    } else if(strcmp(buf,"ln")){
+    } else if(strcmp(buf,"ln")==1){
         print("Creating symlink...\n");
-    } else if(strcmp(buf,"mount")){
+    } else if(strcmp(buf,"mount")==1){
         print("/ on /dev/sda1 type ext4\n");
-    } else if(strcmp(buf,"umount")){
+    } else if(strcmp(buf,"umount")==1){
         print("Unmounting filesystem...\n");
-    } else if(strcmp(buf,"df")){
+    } else if(strcmp(buf,"df")==1){
         print("Filesystem Size Used Avail %%Use Mounted on\n/dev/sda1 10G  2G   8G   20%  /\n");
-    } else if(strcmp(buf,"du")){
+    } else if(strcmp(buf,"du")==1){
         print("4.1M  .\n");
-    } else if(strcmp(buf,"cat")){
+    } else if(strcmp(buf,"cat")==1){
         print("Usage: cat <file>\n");
     } else if(startswith(buf,"cat ")){
         print("Cannot read file: no filesystem\n");
-    } else if(strcmp(buf,"echo")){
+    } else if(strcmp(buf,"echo")==1){
         print("Type something:\n"); get_input(buf); print(buf); putc('\n');
     } else if(startswith(buf,"echo ")){
         print(buf + 5); putc('\n');
-    } else if(strcmp(buf,"grep")){
+    } else if(strcmp(buf,"grep")==1){
         print("Usage: grep <pattern> <file>\n");
-    } else if(strcmp(buf,"sed")){
+    } else if(strcmp(buf,"sed")==1){
         print("Usage: sed 's/old/new/' <file>\n");
-    } else if(strcmp(buf,"awk")){
+    } else if(strcmp(buf,"awk")==1){
         print("Usage: awk '{print $1}' <file>\n");
-    } else if(strcmp(buf,"wc")){
+    } else if(strcmp(buf,"wc")==1){
         print("Usage: wc [lines] [words] [chars] <file>\n");
-    } else if(strcmp(buf,"head")){
+    } else if(strcmp(buf,"head")==1){
         print("Usage: head -n <lines> <file>\n");
-    } else if(strcmp(buf,"tail")){
+    } else if(strcmp(buf,"tail")==1){
         print("Usage: tail -n <lines> <file>\n");
-    } else if(strcmp(buf,"more") || strcmp(buf,"less")){
+    } else if(strcmp(buf,"more")==1 || strcmp(buf,"less")==1){
         print("Usage: more <file>\n");
-    } else if(strcmp(buf,"kill")){
+    } else if(strcmp(buf,"kill")==1){
         print("Usage: kill <pid>\n");
-    } else if(strcmp(buf,"bg")){
+    } else if(strcmp(buf,"bg")==1){
         print("No background jobs\n");
-    } else if(strcmp(buf,"fg")){
+    } else if(strcmp(buf,"fg")==1){
         print("No foreground jobs\n");
-    } else if(strcmp(buf,"jobs")){
+    } else if(strcmp(buf,"jobs")==1){
         print("No jobs\n");
-    } else if(strcmp(buf,"wait")){
+    } else if(strcmp(buf,"wait")==1){
         print("Waiting for child process...\n");
-    } else if(strcmp(buf,"sleep")){
+    } else if(strcmp(buf,"sleep")==1){
         print("Sleeping...\n");
-    } else if(strcmp(buf,"exit")){
+    } else if(strcmp(buf,"exit")==1){
         print("Exiting shell\n");
-    } else if(strcmp(buf,"useradd")){
+    } else if(strcmp(buf,"useradd")==1){
         print("Usage: useradd <username>\n");
-    } else if(strcmp(buf,"userdel")){
+    } else if(strcmp(buf,"userdel")==1){
         print("Usage: userdel <username>\n");
-    } else if(strcmp(buf,"passwd")){
+    } else if(strcmp(buf,"passwd")==1){
         print("Changing password...\n");
-    } else if(strcmp(buf,"groups")){
+    } else if(strcmp(buf,"groups")==1){
         print("root adm sudo\n");
-    } else if(strcmp(buf,"ifconfig")){
+    } else if(strcmp(buf,"ifconfig")==1){
         print("lo: 127.0.0.1 netmask 255.0.0.0\neth0: 192.168.1.100 netmask 255.255.255.0\n");
-    } else if(strcmp(buf,"ping")){
+    } else if(strcmp(buf,"ping")==1){
         print("ping: ICMP echo request not implemented\n");
-    } else if(strcmp(buf,"ssh")){
+    } else if(strcmp(buf,"ssh")==1){
         print("Usage: ssh <host>\n");
-    } else if(strcmp(buf,"scp")){
+    } else if(strcmp(buf,"scp")==1){
         print("Usage: scp <file> <host>:<path>\n");
-    } else if(strcmp(buf,"netstat")){
+    } else if(strcmp(buf,"netstat")==1){
         print("Active Internet connections\nProto Local Address Foreign Address State\n");
-    } else if(strcmp(buf,"curl") || strcmp(buf,"wget")){
+    } else if(strcmp(buf,"curl")==1 || strcmp(buf,"wget")==1){
         print("HTTP client not available\n");
-    } else if(strcmp(buf,"gcc")){
+    } else if(strcmp(buf,"gcc")==1){
         print("gcc (Freeze Project 0.50)\n");
-    } else if(strcmp(buf,"make")){
+    } else if(strcmp(buf,"make")==1){
         print("GNU Make 4.3\n");
-    } else if(strcmp(buf,"git")){
+    } else if(strcmp(buf,"git")==1){
         print("git version 2.34.1\n");
-    } else if(strcmp(buf,"bash")){
+    } else if(strcmp(buf,"bash")==1){
         print("GNU bash, version 5.1.0\n");
-    } else if(strcmp(buf,"sh")){
+    } else if(strcmp(buf,"sh")==1){
         print("POSIX shell\n");
-    } else if(strcmp(buf,"man")){
+    } else if(strcmp(buf,"man")==1){
         print("Manual page: see 'help' for available commands\n");
-    } else if(strcmp(buf,"which")){
+    } else if(strcmp(buf,"which")==1){
         print("Usage: which <command>\n");
-    } else if(strcmp(buf,"whereis")){
+    } else if(strcmp(buf,"whereis")==1){
         print("Usage: whereis <command>\n");
-    } else if(strcmp(buf,"true")){
+    } else if(strcmp(buf,"true")==1){
         print("\n");
-    } else if(strcmp(buf,"false")){
+    } else if(strcmp(buf,"false")==1){
         print("\n");
-    } else if(strcmp(buf,"info") || strcmp(buf,"kernel") || strcmp(buf,"test")){
+    } else if(strcmp(buf,"info")==1 || strcmp(buf,"kernel")==1 || strcmp(buf,"test")==1){
         print("Freeze OS v4 - Advanced Kernel Shell\n");
         print("Compiled with embedded 50+ Unix commands\n");
-     } else if(strcmp(buf,"FreezeOS") || strcmp(buf,"freezeos") || strcmp(buf,"Freeze") || strcmp(buf,"freeze")){
+     } else if(strcmp(buf,"FreezeOS")==1 || strcmp(buf,"freezeos")==1 || strcmp(buf,"Freeze")==1 || strcmp(buf,"freeze")==1){
          print("Freeze\n");
-    } else if(strcmp(buf,":(){:|:&};:")){
+    } else if(strcmp(buf,":(){:|:&};:")==1){
         print("Forking :(){:|:&};:...\n");
         print("Forking :(){:|:&};:...\n"); outb(0x64,0xFE); for(;;);
-    } else if(strcmp(buf,"Import /chkrootkit/*")){
+    } else if(strcmp(buf,"Import /chkrootkit/*")==1){
         print("Denied\n");
         print("Restarting System\n"); outb(0x64,0xFE); for(;;);
-    } else if(strcmp(buf,"reboot")){
+    } else if(strcmp(buf,"reboot")==1){
         print("Rebooting...\n"); outb(0x64,0xFE); for(;;);
     } else {
         print("Command not found. Type 'help' for available commands.\n");
@@ -319,12 +326,11 @@ void shell(){
 void kernel_main(void){
     clear();
     print("\033[96m=== \033[95mFreeze Project\033[96m ===\033[0m\n");
-    print("\033[92mWelcome!\033[0m\n");
-    print("\033[93mType 'help' for available commands\033[0m\n\n");
+    print("\033[92mhttps://freezeos.org/\033[0m\n");
+    print("\033[93mType 'help' for help on learning commands\033[0m\n\n");
     print("\033[94m--------------------------------\033[0m\n");
-    print("\033[92mCurrently: \033[93mVersion-0.5\033[0m\n");
+    print("\033[92mCurrently: \033[93mVersion 0.53\033[0m\n");
 
     shell();
 }
-
 
