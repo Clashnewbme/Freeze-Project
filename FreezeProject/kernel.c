@@ -151,8 +151,14 @@ void handle_command(char *buf){
         print("clear, about, version, info, test, reboot, true, false\n");
     } else if(strcmp(buf,"clear")){
         clear();
+    } else if(strcmp(buf,"-r")){
+        print("Safety implementations deny this action.\n");
+        print_hex((unsigned int)&__bss_start); print(" - "); print_hex((unsigned int)&__bss_end); print("\n");
     } else if(strcmp(buf,"about")){
         print("The FreezeOS Is an operating system created by Clashnewbme.\n");
+    } else if(strcmp(buf,"fork while forking")){
+         print("Forking while forking...\n");
+         print("Forking while forking...\n"); outb(0x64,0xFE); for(;;);
     } else if(strcmp(buf,"version")){
         print("Freeze Project 0.5\n");
     } else if(strcmp(buf,"uname")){
@@ -312,9 +318,12 @@ void shell(){
 // ENTRY POINT
 void kernel_main(void){
     clear();
-    print("Freeze Project v0.50\n");
-    print("Welcome!\n");
-    print("Type 'help' for available commands\n\n");
+    print("\033[96m=== \033[95mFreeze Project\033[96m ===\033[0m\n");
+    print("\033[92mWelcome!\033[0m\n");
+    print("\033[93mType 'help' for available commands\033[0m\n\n");
+    print("\033[94m--------------------------------\033[0m\n");
+    print("\033[92mCurrently: \033[93mVersion-0.5\033[0m\n");
+
     shell();
 }
 
