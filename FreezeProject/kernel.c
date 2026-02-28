@@ -7,13 +7,13 @@ const unsigned int multiboot_header[] = {
 
 #include <stdint.h>
 
-/* serial I/O (implemented in serial.c) */
+/* serial I/o*/
 extern void serial_putc(char c);
 extern void serial_print(const char* s);
 extern int serial_available(void);
 extern char serial_getc(void);
 
-/* simple outb for reset */
+/* reset outb */
 static inline void outb(unsigned short port, unsigned char val){
     __asm__ volatile ("outb %0, %1" : : "a"(val), "Nd"(port));
 }
@@ -21,14 +21,13 @@ static inline void outb(unsigned short port, unsigned char val){
 volatile uint16_t* vga = (uint16_t*)0xB8000;
 int row = 0, col = 0;
 
-/* default text color: green on black */
 uint8_t color = 0x02;
 
 void putc(char c){
     if(c=='\n'){
         row++;
         col = 0;
-        /* mirror newline to serial (CRLF) */
+        /* mirror new line */
         serial_putc('\r');
         serial_putc('\n');
         return;
@@ -50,18 +49,18 @@ void print(const char* s){ for(int i=0; s[i]; i++) putc(s[i]); }
 void clear(){
     for(int i=0;i<80*25;i++) vga[i] = (color<<8) | ' ';
     row = 0; col = 0;
-    /* also clear serial terminal if connected */
+    /* clear serial terminal */
     serial_print("\x1b[2J\x1b[H");
 }
 
-// PORT INPUT
+// PORT iNPUT
 unsigned char inb(unsigned short port){
     unsigned char ret;
     __asm__ volatile ("inb %1, %0" : "=a"(ret) : "Nd"(port));
     return ret;
 }
 
-// SCANCODE MAP
+// Scancode
 char scancode_to_ascii(unsigned char sc){
     char map[128] = {
         0,27,'1','2','3','4','5','6','7','8','9','0','-','=',8,
@@ -73,7 +72,7 @@ char scancode_to_ascii(unsigned char sc){
     return 0;
 }
 
-/* Erase previous character on VGA and serial (backspace) */
+/* backspacing thats it */
 void erase_last_char(){
     if(col > 0){
         col--;
@@ -86,7 +85,7 @@ void erase_last_char(){
     }
 }
 
-// SERIAL input-aware line reader
+// SERIAL input-aware reader
 void get_input(char* buffer){
     int i = 0;
     while(1){
@@ -109,7 +108,7 @@ void get_input(char* buffer){
     }
 }
 
-// simple strcmp (fixed)
+// strcmp
 int strcmp(const char* a,const char* b){
     int i=0;
     while(a[i] && b[i]){
@@ -119,11 +118,11 @@ int strcmp(const char* a,const char* b){
     return a[i]==b[i];
 }
 
-/* expose bss symbols from linker */
+/* expose bss symbol */
 extern unsigned char __bss_start;
 extern unsigned char __bss_end;
 
-/* print hex value (32-bit) */
+/* hex value */
 void print_hex(unsigned int v){
     const char* hex = "0123456789ABCDEF";
     char buf[9];
@@ -135,7 +134,7 @@ void print_hex(unsigned int v){
 
 int startswith(const char* s,const char* p){ int i=0; while(p[i]){ if(s[i]!=p[i]) return 0; i++; } return 1; }
 
-// helper that executes a single command string (no prompt)
+// commands
 void handle_command(char *buf){
     if(strcmp(buf,"help")==1){
         print("=== SYSTEM ===\n");
@@ -300,7 +299,7 @@ void handle_command(char *buf){
     } else if(strcmp(buf,"reboot")==1){
         print("Rebooting...\n"); outb(0x64,0xFE); for(;;);
     } else {
-        print("Command not found. Type 'help' for available commands.\n");
+        print("Command not found.\n");
     }
 }
 
@@ -320,7 +319,7 @@ void shell(){
     }
 }
 
-// ENTRY POINT
+// ENTRY
 void kernel_main(void){
     clear();
     print("\033[96m=== \033[95mFreeze Project\033[96m ===\033[0m\n");
@@ -331,4 +330,3 @@ void kernel_main(void){
 
     shell();
 }
-
