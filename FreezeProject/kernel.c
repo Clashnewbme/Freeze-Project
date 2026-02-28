@@ -1,5 +1,3 @@
-// MULTIBOOT HEADER (REQUIRED)
-// Use flags=3 (align modules, request memory info) and checksum = -(magic+flags)
 __attribute__((section(".multiboot")))
 const unsigned int multiboot_header[] = {
     0x1BADB002,
