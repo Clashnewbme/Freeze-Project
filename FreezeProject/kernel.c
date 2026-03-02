@@ -251,7 +251,6 @@ void handle_command(char *buf){
         print_2digit(sec);
 
         print(" UTC\n");
-            print("Wed Feb 26 05:00:00 UTC 2026\n");
     } else if(strcmp(buf,"id")==1){
         print("uid=0(root) gid=0(root) groups=0(root),4(adm),27(sudo)\n");
     } else if(strcmp(buf,"who")==1){
@@ -377,9 +376,15 @@ void handle_command(char *buf){
     } else if(strcmp(buf,"scp")==1){
         print("Usage: scp <file> <host>:<path>\n");
     } else if(strcmp(buf,"netstat")==1){
-        print("Active Internet connections\nProto Local Address Foreign Address State\n");
+        print("No Internet connections\nProto Local Address Foreign Address State\n");
     } else if(strcmp(buf,"curl")==1 || strcmp(buf,"wget")==1){
         print("HTTP client not available\n");
+    } else if(strcmp(buf,"Dev")==1){
+        print("\033[96m=== \033[95mFreeze Project\033[96m ===\033[0m\n");
+        print("\033[92mhttps://freezeos.org/\033[0m\n");
+        print("\033[93mDeveloped by @Clashnewbme, @Crystal_Nitr0, and others.\033[0m\n\n");
+        print("\033[94m--------------------------------\033[0m\n");
+        print("\033[92mCurrently: \033[93mVersion 0.60\033[0m\n");
     } else if(strcmp(buf,"gcc")==1){
         print("gcc (Freeze Project 0.50)\n");
     } else if(strcmp(buf,"make")==1){
@@ -394,6 +399,35 @@ void handle_command(char *buf){
         print("Manual page: see 'help' for available commands\n");
     } else if(strcmp(buf,"which")==1){
         print("Usage: which <command>\n");
+    } else if(strcmp(buf, "freezefetch") == 1){
+        print("\n");
+        
+        print("        █████████████        FreezeOS\n");
+        print("     ███████████████████     ------------\n");
+        print("   ███████████████████████   OS: FreezeOS\n");
+        print("  █████████████████████████  Created by: Clashnewbme, Crystal_Nitr0\n");
+        print(" ████████  ███████  ████████ https://freezeos.org/\n");
+        print(" ███████    █████    ███████ \n");
+        print(" ███████   ██   ██   ███████ \n");
+        print("  ███████   \\___/   ███████ \n");
+        print("   ███████████████████████   \n");
+        print("     ███████████████████     \n");
+        print("        █████████████        \n");
+        print("   ==                 ==    \n");
+
+        print("\n");
+
+        print("   ");
+        print("\033[40m   \033[0m");
+        print("\033[100m   \033[0m");
+        print("\033[47m   \033[0m");
+        print("\033[97m   \033[0m");
+        print("\033[46m   \033[0m");
+        print("\033[44m   \033[0m"); 
+        print("\033[106m   \033[0m"); 
+        print("\033[107m   \033[0m"); 
+
+        print("\n\n");
     } else if(strcmp(buf,"whereis")==1){
         print("Usage: whereis <command>\n");
     } else if(strcmp(buf,"true")==1){
