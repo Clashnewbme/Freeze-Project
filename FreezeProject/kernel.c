@@ -6,6 +6,11 @@ const unsigned int multiboot_header[] = {
 };
 
 #include <stdint.h>
+#define MAX_USERS 10
+#define MAX_NAME  32
+
+char users[MAX_USERS][MAX_NAME];
+int user_count = 0;
 
 /* serial I/o*/
 extern void serial_putc(char c);
@@ -193,7 +198,7 @@ int startswith(const char* s,const char* p){ int i=0; while(p[i]){ if(s[i]!=p[i]
 void handle_command(char *buf){
     if(strcmp(buf,"help")==1){
         print("=== SYSTEM ===\n");
-        print("uname, uptime, date, id, who, ps, top, lsmod, dmesg, systemctl, shutdown\n");
+        print("uname, date, id, who, ps, top, lsmod, dmesg, systemctl, shutdown\n");
         print("=== TEXT ===\n");
         print("cat, echo, grep, sed, awk, wc, head, tail, more, less\n");
         print("=== FILE ===\n");
@@ -274,7 +279,7 @@ void handle_command(char *buf){
     } else if(strcmp(buf,"file")==1){
         print("kernel.bin: ELF 32-bit LSB executable\n");
     } else if(strcmp(buf,"stat")==1){
-        print("File: kernel.bin Size: 10144 Blocks: 20 Inode: 12345\n");
+        print("File: kernel.bin Size: 2.5\n");
     } else if(strcmp(buf,"chmod")==1){
         print("File permissions changed\n");
     } else if(strcmp(buf,"chown")==1){
@@ -313,8 +318,24 @@ void handle_command(char *buf){
         print("Usage: more <file>\n");
     } else if(strcmp(buf,"kill")==1){
         print("Usage: kill <pid>\n");
-    } else if(strcmp(buf,"bg")==1){
-        print("No background jobs\n");
+    } else if(strcmp(buf,"hlr")==1){
+
+        print("\033[41m"); 
+        print("                            -- Highlight color red Selected --                           \n");
+    } else if(strcmp(buf,"hlb")==1){
+
+        print("\033[44m");
+        print("                         -- Highlight color Blue Selected --                                \n");
+    } else if(strcmp(buf,"hlm")==1){
+
+        print("\033[45m");
+        print("                        -- Highlight color Magenta Selected --                             \n");
+
+    } else if(strcmp(buf,"hlg")==1){
+
+    print("\033[42m");
+    print("                        -- Highlight color Green Selected --                             \n");
+
     } else if(strcmp(buf,"fg")==1){
         print("No foreground jobs\n");
     } else if(strcmp(buf,"jobs")==1){
@@ -324,9 +345,9 @@ void handle_command(char *buf){
     } else if(strcmp(buf,"sleep")==1){
         print("Sleeping...\n");
     } else if(strcmp(buf,"exit")==1){
-        print("Exiting shell\n");
+        print("Exiting...\n"); outb(0x64,0xFE); for(;;);
     } else if(strcmp(buf,"useradd")==1){
-        print("Usage: useradd <username>\n");
+        print("Unable to do so.\n");
     } else if(strcmp(buf,"color")==1){
         print("\033[31m&&& \033[32m&&& \033[33m&&& \033[34m&&& \033[35m&&&\n");
         print("\033[36m&&& \033[31m&&& \033[32m&&& \033[33m&&& \033[34m&&&\n");
