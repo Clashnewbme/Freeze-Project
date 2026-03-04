@@ -38,6 +38,7 @@ FreezeOS is a clean, designed to be Lightweight, simple, and customizable.
 - Assembly
 - Linker Script
 - Makefile
+- Shell
 
 ---
 
