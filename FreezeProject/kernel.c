@@ -8,6 +8,7 @@ const unsigned int multiboot_header[] = {
 #include "memory.h"
 #include <stdint.h>
 
+
 /* serial I/o*/
 extern void serial_putc(char c);
 extern void serial_print(const char* s);
