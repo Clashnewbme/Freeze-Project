@@ -75,4 +75,4 @@ The Freeze Project (like most projects) usually only supports BIOS / Legacy.
 
 # Extra
 
-If you want more information check out the Freeze Project Website (https://freeze-project.vercel.app)
+If you want more information check out the Freeze Project Website (https://freezeos.org)
