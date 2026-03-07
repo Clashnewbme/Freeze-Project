@@ -6,6 +6,7 @@ const unsigned int multiboot_header[] = {
 };
 
 #include "memory.h"
+#include "timer.h"
 #include <stdint.h>
 
 
