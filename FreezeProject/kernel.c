@@ -197,15 +197,13 @@ void handle_command(char *buf){
         print("=== SYSTEM ===\n");
         print("uname, date, id, who, ps, top, lsmod, dmesg, systemctl, shutdown\n");
         print("=== TEXT ===\n");
-        print("echo, grep, sed, awk, wc, head, tail, more, less\n");
+        print("echo, sed, awk, wc, head\n");
         print("=== FILE ===\n");
-        print("ls, pwd, file, stat, chmod, chown, ln, mount, umount, df, du\n");
+        print("ls, pwd, file, stat, chown, ln, df, du\n");
         print("=== PROCESS ===\n");
-        print("kill, fg, jobs, wait, exit, sleep\n");
+        print("kill, wait, exit, sleep\n");
         print("=== USER ===\n");
-        print("useradd, userdel, passwd, groups, sudo\n");
-        print("=== NETWORK ===\n");
-        print("ifconfig, netstat, curl, wget\n");
+        print("useradd, userdel, groups, sudo\n");
         print("=== DEV ===\n");
         print(" make, bash, sh, man, which, whereis\n");
         print("=== OTHER ===\n");
@@ -270,44 +268,34 @@ void handle_command(char *buf){
         print("Shutting down...\n"); outb(0x64,0xFE); for(;;);
     } else if(strcmp(buf,"ls")==1){
         print("boot/  kernel.bin  grub/  README.md\n");
-    } else if(strcmp(buf,"file")==1){
-        print("kernel.bin: ELF 32-bit LSB executable\n");
+    } else if(strcmp(buf,"add file")==1){
+        print("Creating new file..\n");
+            print("\033[96m=== \033[95mFile Editor\033[96m ===\033[0m\n");
+            print("\033[92mText file succesfully created\033[0m\n");
+            print("\033[93mUse type to write\033[0m\n\n");
+            print("\033[94m--------------------------------\033[0m\n");
+            print("\033[92mText file typer: \033[93mVersion 0.32\033[0m\n");
+    } else if(strcmp(buf,"type")==1){
+        print("Editing file:\n"); get_input(buf); print(buf); putc('\n');
+    } else if(startswith(buf,"type ")){
+        print(buf + 5); putc('\n');
     } else if(strcmp(buf,"stat")==1){
         print("File: kernel.bin Size: 2.5\n");
-    } else if(strcmp(buf,"chmod")==1){
-        print("File permissions changed\n");
     } else if(strcmp(buf,"chown")==1){
         print("File owner changed\n");
     } else if(strcmp(buf,"ln")==1){
         print("Creating symlink...\n");
-    } else if(strcmp(buf,"mount")==1){
-        print("/ on /dev/sda1 type ext4\n");
-    } else if(strcmp(buf,"umount")==1){
-        print("Unmounting filesystem...\n");
     } else if(strcmp(buf,"df")==1){
         print("Filesystem Size Used Avail %%Use Mounted on\n/dev/sda1 10G  2G   8G   20%  /\n");
     } else if(startswith(buf,"cat ")){
-        print("Cannot read file: no filesystem\n");
+        print("Folders: Textfiles, FreezeProject, grub, iso, memory, \n");
     } else if(strcmp(buf,"echo")==1){
         print("Type something:\n"); get_input(buf); print(buf); putc('\n');
     } else if(startswith(buf,"echo ")){
         print(buf + 5); putc('\n');
-    } else if(strcmp(buf,"grep")==1){
-        print("Usage: grep <pattern> <file>\n");
-    } else if(strcmp(buf,"sed")==1){
-        print("Usage: sed 's/old/new/' <file>\n");
-    } else if(strcmp(buf,"awk")==1){
-        print("Usage: awk '{print $1}' <file>\n");
-    } else if(strcmp(buf,"wc")==1){
-        print("Usage: wc [lines] [words] [chars] <file>\n");
-    } else if(strcmp(buf,"head")==1){
-        print("Usage: head -n <lines> <file>\n");
-    } else if(strcmp(buf,"tail")==1){
-        print("Usage: tail -n <lines> <file>\n");
-    } else if(strcmp(buf,"more")==1 || strcmp(buf,"less")==1){
-        print("Usage: more <file>\n");
-    } else if(strcmp(buf,"kill")==1){
-        print("Usage: kill <pid>\n");
+    } else if(strcmp(buf,"kill")==1 || strcmp(buf,"kill all")==1){
+        print("Succecfully killed all processes\n");
+        print("Restarting to process changes\n"); outb(0x64,0xFE); for(;;);
     } else if(strcmp(buf,"hlr")==1){
 
         print("\033[41m"); 
@@ -326,14 +314,10 @@ void handle_command(char *buf){
     print("\033[42m");
     print("                        -- Highlight color Green Selected --                             \n");
 
-    } else if(strcmp(buf,"fg")==1){
-        print("No foreground jobs\n");
-    } else if(strcmp(buf,"jobs")==1){
-        print("No jobs\n");
     } else if(strcmp(buf,"wait")==1){
         print("Waiting for child process...\n");
     } else if(strcmp(buf,"sleep")==1){
-        print("Sleeping...\n");
+        print("Sleeping...\n"); outb(0x64,0xFE);
     } else if(strcmp(buf,"exit")==1){
         print("Exiting...\n"); outb(0x64,0xFE); for(;;);
     } else if(strcmp(buf,"useradd")==1){
@@ -374,14 +358,6 @@ void handle_command(char *buf){
         print("\033[33m&&& \033[33m&&& \033[33m&&& \033[33m&&& \033[33m&&& \033[33m&&& \033[33m&&& \033[33m&&&\n");
 
         print("\033[0m\n"); 
-    } else if(strcmp(buf,"passwd")==1){
-        print("Changing password...\n");
-    } else if(strcmp(buf,"ifconfig")==1){
-        print("lo: unknown netmask unknown\neth0: unknown netmask unknown\n");
-    } else if(strcmp(buf,"netstat")==1){
-        print("No Internet connections\nProto Local Address Foreign Address State\n");
-    } else if(strcmp(buf,"curl")==1 || strcmp(buf,"wget")==1){
-        print("HTTP client not available\n");
     } else if(strcmp(buf,"Dev")==1){
         print("\033[96m=== \033[95mFreeze Project\033[96m ===\033[0m\n");
         print("\033[92mhttps://freezeos.org/\033[0m\n");
