@@ -521,6 +521,230 @@ void handle_command(char *buf){
 
         print("        \n");
         print("\033[95m=== END ===\033[0m\n");
+
+            } else if(strcmp(buf,"library")==1){
+
+        print("Opening FreezeProject/applications/library.fp\n");
+        print("        \n");
+        print("\033[95m=== DIGITAL LIBRARY ===\033[0m\n");
+        print("Choose a book (1)\n");
+        print("(theres only 2 rn)");
+
+        int running = 1;
+
+        while(running){
+            print("\033[96mlibrary> \033[0m");
+            get_input(buf);
+// hey reminder to contributor, we are using the https://www.gutenberg.org/ free library, please do not use or add copyrighted material.
+            if(strcmp(buf,"1")==1){
+                print("\033[93mFrankenstein - Mary Shelley\033[0m\n");
+
+                print("Letter 1\n");
+                print("To Mrs. Saville, England.\n\n");
+                print("St. Petersburgh, Dec. 11th, 17—.\n");
+                print("You will rejoice to hear that no disaster has accompanied the commencement of an enterprise which you have regarded with such evil forebodings.\n");
+                print("I arrived here yesterday, and my first task is to assure my dear sister of my welfare and increasing confidence in the success of my undertaking.\n");
+                print("I am already far north of London, and as I walk in the streets of Petersburgh, I feel a cold northern breeze play upon my cheeks...\n");
+
+                print("\nLetter 2\n");
+                print("Archangel, 28th March, 17—.\n");
+                print("How slowly the time passes here, encompassed as I am by frost and snow!\n");
+                print("Yet a second step is taken towards my enterprise...\n");
+
+                print("\nLetter 3\n");
+                print("July 7th, 17—.\n");
+                print("My dear Sister,\n");
+                print("I write a few lines in haste to say that I am safe—and well advanced on my voyage...\n");
+
+                print("\nLetter 4\n");
+                print("August 5th, 17—.\n");
+                print("So strange an accident has happened to us that I cannot forbear recording it...\n");
+
+                print("\nChapter 1\n");
+                print("I am by birth a Genevese, and my family is one of the most distinguished of that republic.\n");
+                print("My ancestors had been for many years counsellors and syndics...\n");
+                print("My father, Alphonse Frankenstein, was respected by all who knew him...\n");
+                print("He came to the assistance of a merchant friend who had fallen into poverty...\n");
+                print("Among his friends was one who had been reduced from affluence to ruin...\n");
+                print("This man's daughter was Caroline Beaufort...\n");
+                print("My father sought her out and married her...\n");
+                print("\033[93mFrankenstein - Mary Shelley\033[0m\n");
+
+                print("\nChapter 2\n");
+                print("We were brought up together; there was not quite a year difference in our ages.\n");
+                print("I need not say that we were strangers to any species of disunion or dispute.\n");
+                print("Harmony was the soul of our companionship, and the diversity and contrast that subsisted in our characters drew us nearer together.\n");
+                print("Elizabeth was of a calmer and more concentrated disposition; but, with all my ardour, I was capable of a more intense application.\n");
+                print("She busied herself with following the aerial creations of the poets; and in the majestic and wondrous scenes which surrounded our Swiss home.\n");
+                print("The world was to me a secret which I desired to divine.\n");
+                print("Curiosity, earnest research to learn the hidden laws of nature, gladness akin to rapture, as they were unfolded to me, are among the earliest sensations I can remember.\n");
+                print("When I was about thirteen years of age, we all went on a party of pleasure to the baths near Thonon.\n");
+                print("The weather was fine; and we passed several days happily.\n");
+                print("One day, while wandering among the mountains, I found a volume of the works of Cornelius Agrippa.\n");
+                print("I opened it with apathy; the theory which he attempts to demonstrate and the wonderful facts which he relates soon changed this feeling into enthusiasm.\n");
+                print("A new light seemed to dawn upon my mind...\n");
+
+                print("\nChapter 3\n");
+                print("When I had attained the age of seventeen, my parents resolved that I should become a student at the University of Ingolstadt.\n");
+                print("I had hitherto attended the schools of Geneva, but my father thought it necessary for the completion of my education that I should be made acquainted with other customs than those of my native country.\n");
+                print("My departure was therefore fixed at an early date.\n");
+                print("But before the day resolved upon could arrive, the first misfortune of my life occurred—an omen, as it were, of my future misery.\n");
+                print("Elizabeth had caught the scarlet fever; her illness was severe, and she was in the greatest danger.\n");
+                print("During her illness, many arguments had been urged to persuade my mother to refrain from attending upon her.\n");
+                print("She had at first yielded to our entreaties; but when she heard that the life of her favourite was menaced, she could no longer control her anxiety.\n");
+                print("She attended her sickbed; her watchful attentions triumphed over the malignity of the distemper.\n");
+                print("Elizabeth was saved, but the consequences of this imprudence were fatal to her preserver.\n");
+                print("On the third day my mother sickened; her fever was accompanied by the most alarming symptoms.\n");
+                print("On her deathbed, she joined the hands of Elizabeth and myself.\n");
+                print("“My children,” she said, “my firmest hopes of future happiness were placed on the prospect of your union.”\n");
+                print("She died calmly...\n");
+
+                print("\nChapter 4\n");
+                print("From this day natural philosophy, and particularly chemistry, in the most comprehensive sense of the term, became nearly my sole occupation.\n");
+                print("I read with ardour those works, so full of genius and discrimination, which modern inquirers have written on these subjects.\n");
+                print("I attended the lectures and cultivated the acquaintance of the men of science of the university.\n");
+                print("In M. Waldman I found a true friend.\n");
+                print("He praised with warmth the astonishing progress I had made, and exhorted me to persevere.\n");
+                print("Under his guidance I entered with the greatest diligence into the search of the philosopher’s stone and the elixir of life.\n");
+                print("But these were not my only visions.\n");
+                print("The raising of ghosts or devils was a promise liberally accorded by my favourite authors...\n");
+                print("Life and death appeared to me ideal bounds, which I should first break through, and pour a torrent of light into our dark world.\n");
+                print("A new species would bless me as its creator and source.\n");
+                print("Many happy and excellent natures would owe their being to me.\n");
+                print("No father could claim the gratitude of his child so completely as I should deserve theirs.\n");
+                print("Pursuing these reflections, I thought, that if I could bestow animation upon lifeless matter, I might in process of time renew life where death had apparently devoted the body to corruption.\n");
+
+                print("\033[93mGenerating book...\033[0m\n");
+
+                print("\nChapter 5\n");
+                print("It was on a dreary night of November that I beheld the accomplishment of my toils.\n");
+                print("With an anxiety that almost amounted to agony, I collected the instruments of life around me.\n");
+                print("It was already one in the morning; the rain pattered dismally against the panes, and my candle was nearly burnt out.\n");
+                print("By the glimmer of the half-extinguished light, I saw the dull yellow eye of the creature open.\n");
+                print("It breathed hard, and a convulsive motion agitated its limbs.\n");
+                print("How can I describe my emotions at this catastrophe, or how delineate the wretch whom with such infinite pains and care I had endeavoured to form?\n");
+                print("His limbs were in proportion, and I had selected his features as beautiful.\n");
+                print("Beautiful!—Great God!\n");
+                print("His yellow skin scarcely covered the work of muscles and arteries beneath.\n");
+                print("His hair was of a lustrous black, and flowing; his teeth of a pearly whiteness.\n");
+                print("But these luxuriances only formed a more horrid contrast with his watery eyes...\n");
+                print("Unable to endure the aspect of the being I had created, I rushed out of the room...\n");
+
+                print("\nChapter 6\n");
+                print("Clerval called forth the better feelings of my heart; he again taught me to love the aspect of nature.\n");
+                print("I had been the cause of so much misery, and I shrank from the remembrance.\n");
+                print("I seized the letter that Clerval had brought from my father.\n");
+                print("It was from Elizabeth.\n");
+                print("“My dearest cousin,” she wrote, “you have been ill, very ill, and even the constant letters of dear Henry are not sufficient to reassure me on your account.”\n");
+                print("She described the happiness of my family and the tranquil life they led.\n");
+                print("She spoke also of Justine Moritz, who had returned to our house...\n");
+                print("“She is very clever and gentle,” wrote Elizabeth, “and extremely pretty.”\n");
+                print("These cheerful tidings did much to restore my spirits.\n");
+                print("Spring advanced rapidly; the weather became fine and serene...\n");
+
+                print("\nChapter 7\n");
+                print("On my return, I found the following letter from my father:—\n");
+                print("“My dear Victor,\n");
+                print("You have probably waited impatiently for a letter to fix the date of your return to us.”\n");
+                print("“William is dead!”\n");
+                print("That sweet child, whose smiles delighted and warmed my heart, who was so gentle, yet so gay!\n");
+                print("He was murdered.\n");
+                print("Come, dearest Victor; you alone can console Elizabeth.”\n");
+                print("I shuddered at the calamity.\n");
+                print("I saw the necessity of returning to Geneva, and I immediately set out.\n");
+                print("As I approached my native town, I saw the lightning playing on the summit of Mont Blanc.\n");
+                print("The storm appeared to approach rapidly.\n");
+                print("In a moment of sudden illumination, I beheld the figure of a man at some distance.\n");
+                print("A flash of lightning illuminated the object, and discovered its shape plainly to me.\n");
+                print("Its gigantic stature, and the deformity of its aspect, more hideous than belongs to humanity, instantly informed me that it was the wretch—the filthy daemon to whom I had given life.\n");
+                print("I considered the being whom I had cast among mankind, and endowed with the will and power to effect purposes of horror...\n");
+                print("\033[93mFrankenstein - Mary Shelley\033[0m\n");
+
+                print("\nChapter 8\n");
+                print("We passed a few sad hours until eleven o'clock, when the trial was to commence.\n");
+                print("My father and the rest of the family being obliged to attend as witnesses, I accompanied them to the court.\n");
+                print("During the whole of this wretched mockery of justice I suffered living torture.\n");
+                print("It was to be decided whether the result of my curiosity and lawless devices would cause the death of two of my fellow beings.\n");
+                print("Justine was called.\n");
+                print("She appeared calm, yet her calmness was evidently constrained.\n");
+                print("Many witnesses were called against her.\n");
+                print("She had been seen near the spot where William had been murdered.\n");
+                print("A picture of my mother, which William had worn, was found in her pocket.\n");
+                print("The evidence was strong, and she was convicted.\n");
+                print("“I did confess,” she said, “but I confessed a lie.”\n");
+                print("She spoke with a firm voice, yet tears streamed from her eyes.\n");
+                print("“God knows how entirely I am innocent.”\n");
+                print("The judges passed the sentence of death.\n");
+                print("I listened in horror.\n");
+                print("The tortures of the accused did not equal mine.\n");
+
+                print("\nChapter 9\n");
+                print("Nothing is more painful to the human mind than a great and sudden change.\n");
+                print("The fall from prosperity to misery was too abrupt.\n");
+                print("I remained two months in Geneva, incapable of attending to any occupation.\n");
+                print("Remorse extinguished every hope.\n");
+                print("I was the true murderer.\n");
+                print("Elizabeth was sad and desponding.\n");
+                print("“The death of William, the execution of Justine, and all the misery that has followed,” she said, “have deprived me of repose.”\n");
+                print("My father tried to inspire us with hope, but the loss was too heavy.\n");
+                print("I avoided the face of man; all sound of joy or complacency was torture to me.\n");
+                print("At length I resolved to seek solace in the mountains.\n");
+                print("I journeyed to Chamounix.\n");
+                print("The vast and magnificent scenes afforded me the greatest consolation that I was capable of receiving.\n");
+
+                print("\nChapter 10\n");
+                print("I spent the following day roaming through the valley.\n");
+                print("The immense mountains and precipices that overhung me, the sound of the river raging among the rocks, and the dashing of the waterfalls spoke of a power mighty as Omnipotence.\n");
+                print("These sublime and magnificent scenes afforded me the greatest consolation.\n");
+                print("They elevated me from all littleness of feeling.\n");
+                print("But the sight of the monster filled me with bitterness and hatred.\n");
+                print("He approached; his countenance bespoke bitter anguish.\n");
+                print("“Devil,” I exclaimed, “do you dare approach me?”\n");
+                print("“Begone, vile insect!”\n");
+                print("He replied calmly, “I expected this reception.”\n");
+                print("“All men hate the wretched; how, then, must I be hated, who am miserable beyond all living things!”\n");
+                print("He demanded that I hear his tale.\n");
+                print("“Listen to my story,” he said, “and then abandon or commiserate me, as you shall judge that I deserve.”\n");
+                print("I hesitated, but at length I consented to hear him.\n");
+                print("\033[93mFrankenstein - Mary Shelley\033[0m\n");
+
+                print("\nChapter 11\n");
+                print("The creature begins his story, describing his early experiences.\n");
+                print("He awakens alone, confused, and overwhelmed by sensations.\n");
+                print("He learns through observation—light, heat, hunger, and sleep.\n");
+                print("He discovers fire, first bringing comfort, then pain.\n");
+                print("He begins to understand his environment and his own existence.\n");
+                print("Loneliness becomes his greatest suffering.\n");
+
+                print("\nChapter 12\n");
+                print("The creature wanders through forests and eventually finds a small hut attached to a cottage.\n");
+                print("He secretly observes the De Lacey family living inside.\n");
+                print("He watches their interactions and begins to understand human behavior.\n");
+                print("He notices kindness, love, and communication among them.\n");
+                print("Through them, he learns language and emotions.\n");
+                print("He feels admiration for their goodness, but also deep sadness about his own isolation.\n");
+
+                print("\nChapter 13\n");
+                print("The creature continues observing the De Lacey family closely.\n");
+                print("He learns more about language and begins to speak to himself.\n");
+                print("He discovers that the family is poor, yet kind and hardworking.\n");
+                print("He becomes especially interested in their situation and hopes to eventually reveal himself.\n");
+                print("He begins to form a plan to approach them, believing they may accept him.\n");
+                print("Despite his hopes, he still struggles with his appearance and fear of rejection.\n");
+            }
+
+            else if(strcmp(buf,"exit")==1){
+                print("Closing library...\n");
+                running = 0;
+            }
+
+            else {
+                print("Unknown selection.\n");
+            }
+        }
+
+        print("        \n");
+        print("\033[95mLibrary closed.\033[0m\n");
     } else if(strcmp(buf,"kill")==1 || strcmp(buf,"kill all")==1){
         print("Successfully killed all processes\n");
         print("Restarting to process changes\n"); outb(0x64,0xFE); for(;;);
