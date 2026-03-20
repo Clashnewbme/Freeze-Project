@@ -2,7 +2,7 @@
 
 > A simple, easy to set up operating system
 
-FreezeOS is a clean, designed to be Lightweight, simple, and customizable.
+"FreezeOS is a clean, designed to be Lightweight, simple, and customizable **OS."
 
 ---
 
