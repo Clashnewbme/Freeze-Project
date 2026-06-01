@@ -427,12 +427,14 @@ void handle_command(char* buf, const uint buf_size) {
         print("FreezeProject/applications/typingtest.fp\n");
         print("FreezeProject/applications/adarkplace.fp\n");
         print("FreezeProject/applications/library.fp\n");
+
         print(
             "To run these applications just type their file name so to run "
             "typing test type, (typingtest.fp) this will run the app\n");
         print(
             "This rule does not apply for library, just type (library) and the "
             ".fp will auto run.\n");
+        print("Reminder: You can download more using the internet\n");
     } else if (strcmp(buf, "bario") == 1) {
         bario_game();
     } else if (strcmp(buf, "race test [removing soon]") == 1) {
