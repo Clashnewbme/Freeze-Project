@@ -2,7 +2,7 @@
 #define FS_H
 
 #include <stdint.h>
-#include "ext2.h"
+#include "fat32.h"
 
 #define MAX_FILES 32
 #define MAX_FILENAME 32

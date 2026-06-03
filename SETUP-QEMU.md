@@ -10,7 +10,7 @@ Open qemu and run:
 
 ```bash
 sudo apt update
-sudo apt install build-essential grub-pc-bin grub-common xorriso qemu-system-x86 -y
+sudo apt install build-essential grub-pc-bin grub-common xorriso qemu-system-x86 dosfstools mtools -y
 ```
 
 ## 2. Build
@@ -18,18 +18,17 @@ To build:
 ```bash
 make
 ```
-To clean
+To clean:
 ```bash
 make clean
 ```
-Run
+Run:
 ```bash
 make run
 ```
-To do all that together
+To do everything together:
 ```bash
-make clean && make
-make run
+make clean && make && make run
 ```
 
 if you want you may check for the iso file:

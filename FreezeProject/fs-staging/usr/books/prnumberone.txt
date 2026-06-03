@@ -1,0 +1,87 @@
+The First PR of the Legendary Freeze Project by Freeze software.
+
+It all started with a user on github named @coderLukasF. He was looking at reddit posts on an OS Development subreddit.
+He saw a post of a new OS made completely from scratch called FreezeOS. He liked the project. He thought it looked cool.
+
+He looked through most of the files and code but then found something SHOCKING.
+
+In one of the MD files, and discovered something SHOCKING.
+
+He was in SETUP.MD, looking at the file, but at the bottom, it showed a link that was horribly wrong.
+Could it have been a virus? Was the owner trying to hack someone? Was the owner hacked and the hacker was trying to get more visits to their website?
+
+Everywhere else, the link was freezeos.org, but instead of being freezeos.org, it was freeze-project.vercel.app.
+
+He had to investigate. I clicked on the link, freeze-project.vercel.app. It looked like a normal website.
+He inspected the website carefully. Everything looked good. But why would one have two links to a website?
+
+He looked deeper into it. HTML from freezeos.org and HTML from freeze-project.vercel.app, the same.
+Same for the CSS. Same for the JS. Same for everything.
+
+Then he realized: If this was a ripoff, this could be a bad download iso!
+He downloaded it. It looked fine. It ran normally.
+
+It looked like it could have been an old link that was abandoned. He needed to report this immediately.
+
+Then: He decided to fork the original repository to FreezeOS. He changed the link. He submitted a pull request:
+
+CoderLukasF commented on Feb 28:
+- - - - - - - - - - - - - - - - - -
+Changed it from freeze-project.vercel.app to freezeos.org in setup.md
+Thats about it
+
+He felt good about this decision. It could change the entire OS. He could become one of the lead contributors. He hoped that would happen.
+This could have been the most important PR in the projects history. Lets see what Clashnewbme, the lead developer, would say about this.
+
+Clashnewbme commented on Mar 4:
+- - - - - - - - - - - - - - - - - -
+Reply: Changed it from freeze-project.vercel.app to freezeos.org in setup.md Thats about it
+
+Thanks.
+
+He got appreciation. He got credit. He got what he hoped for, respect. He would make a risky decision- compare the OS better to linux because of how good this PR was.
+Risky, but could get him in the position he wanted.
+
+coderLukasF commented on Mar 4
+- - - - - - - - - - - - - - - - - -
+Reply: Thanks.
+
+I know right, I added so much stuff that this os is practically better than linux!
+
+It was very risky. He was shaking with anxiety. This could make him hated, or the most respected in the OS's history.
+Then, he got a response. His eyes opened in shock. He blinked to make sure he wasnt seeing things.
+
+Clashnewbme commented on Mar 4
+- - - - - - - - - - - - - - - - - -
+Reply: I know right, I added so much stuff that this os is practically better than linux
+
+You built the whole OS.
+
+He wasnt seeing things. HE GOT WHAT HE WANTED THIS ENTIRE TIME!
+But then, he replied to his own reply, asking coderLukasF to do one of the most risky decisions that he would do yet.
+
+Clashnewbme commented on Mar 5
+- - - - - - - - - - - - - - - - - -
+Reply: You built the whole OS.
+
+Because you did so much can you give this repo a star?
+
+This was insanely risky. One of his stars, he has saved since childhood, that he totally does NOT have infinite of, he has to spend.
+Was it worth spending for this project? Did he REALLY want to get into this position? This would decide EVERYTHING.
+His star. HIS. Could be going to an OS developer. Making an OS is hard. They deserve it.
+
+He moved his mouse to the star button, and clicked it. HIS star was gone, but it was well spent. He needed to show proof.
+Clashnewbme could just think a random person starred it. He had to show that it was HIS star.
+
+coderLukasF commented on Mar 5
+- - - - - - - - - - - - - - - - - -
+Reply: Because you did so much can you give this repo a star?
+
+Yes.
+
+
+He did it. coderLukasF did it. He showed proof of the star.
+
+He totally became one of the lead developers after that, and totally made SO many good updates, from one MD change. Hooray!
+
+After that, all the coders lived happily ever after.

@@ -2,14 +2,14 @@
 #include "disk.h"
 #include "memory.h"
 #include "vga.h"
-#include "ext2.h"
+#include "fat32.h"
 
 char* strcpy(char* dest, const char* src);
 void* memcpy(void* dest, const void* src, size_t n);
 void* memset(void* s, int c, size_t n);
 size_t strlen(const char* s);
 
-static int fs_type = 0;  /* 0 = custom, 1 = ext2 */
+static int fs_type = 0;  /* 0 = custom, 1 = FAT32 */
 
 char* strcpy(char* dest, const char* src) {
     char* d = dest;
@@ -111,10 +111,10 @@ static int fs_calculate_sectors_needed(uint32_t size) {
 }
 
 void fs_mount() {
-    /* Try mounting as ext2 first */
-    if (ext2_mount() == 0) {
+    /* Try mounting as FAT32 first */
+    if (fat32_mount() == 0) {
         fs_type = 1;
-        print("[FS] ext2 filesystem detected and mounted\n");
+        print("[FS] FAT32 filesystem detected and mounted\n");
         return;
     }
     
@@ -216,14 +216,14 @@ int fs_read(int fd, char* buffer, uint32_t size) {
     if (fd < 0 || fd >= MAX_FILES || !files[fd].used) return -1;
 
     if (fs_type == 1) {
-        if (files[fd].dirty || files[fd].inode_num == 0) {
+        if (files[fd].dirty) {
             if (size > files[fd].size) size = files[fd].size;
             memcpy(buffer, files[fd].content, size);
             return size;
         }
 
         if (size > files[fd].size) size = files[fd].size;
-        return ext2_read_file(files[fd].inode_num, 0, buffer, size);
+        return fat32_read_file(files[fd].name, 0, buffer, size);
     }
     
     if (size > files[fd].size) size = files[fd].size;
@@ -248,20 +248,15 @@ int fs_find(const char* name) {
         }
 
         {
-            int inode_num = ext2_find_path(name);
-            if (inode_num >= 0) {
-                struct ext2_inode inode;
+            struct fat32_file_info info;
+            if (fat32_find_path(name, &info) == 0 && (info.attrs & 0x10) == 0) {
                 int fd = fs_alloc_slot(name);
                 if (fd < 0) {
                     return -1;
                 }
-                if (ext2_read_inode((uint32_t)inode_num, &inode) != 0) {
-                    files[fd].used = 0;
-                    return -1;
-                }
-                files[fd].inode_num = (uint32_t)inode_num;
-                files[fd].size = inode.size;
-                files[fd].disk_size = inode.size;
+                files[fd].inode_num = info.first_cluster;
+                files[fd].size = info.size;
+                files[fd].disk_size = info.size;
                 return fd;
             }
         }
@@ -287,13 +282,13 @@ int fs_save(int fd) {
     if (fd < 0 || fd >= MAX_FILES || !files[fd].used) return -1;
 
     if (fs_type == 1) {
-        uint32_t inode_num = files[fd].inode_num;
+        uint32_t first_cluster = files[fd].inode_num;
 
-        if (ext2_write_file(files[fd].name, files[fd].content, files[fd].size, &inode_num) != 0) {
+        if (fat32_write_file(files[fd].name, files[fd].content, files[fd].size, &first_cluster) != 0) {
             return -1;
         }
 
-        files[fd].inode_num = inode_num;
+        files[fd].inode_num = first_cluster;
         files[fd].dirty = 0;
         files[fd].disk_size = files[fd].size;
         return 0;
@@ -380,7 +375,9 @@ void fs_sync() {
 }
 
 int fs_delete(const char* name) {
-    if (fs_type == 1) return -1;
+    if (fs_type == 1) {
+        return fat32_delete(name);
+    }
 
     int fd = fs_find(name);
     if (fd < 0) return -1;
@@ -399,13 +396,13 @@ int fs_delete(const char* name) {
 int fs_list_path(const char* path) {
     if (fs_type == 1) {
         if (!path || path[0] == 0 || (path[0] == '/' && path[1] == 0)) {
-            print("[EXT2] Root directory:\n");
+            print("[FAT32] Root directory:\n");
         } else {
-            print("[EXT2] Directory: ");
+            print("[FAT32] Directory: ");
             print(path);
             print("\n");
         }
-        return ext2_list_path(path && path[0] ? path : "/");
+        return fat32_list_path(path && path[0] ? path : "/");
     }
 
     if (path && path[0]) {

@@ -98,16 +98,23 @@ $(FSDIR)/.files: $(FSDIR)/.dirs $(ROOTFS_SOURCES) $(IMPORT_SOURCES)
 	fi
 	touch $@
 
-# disk image for persistent file system (ext2 format)
+# disk image for persistent file system (FAT32 format)
 freeze.img: $(FSDIR)/.files
-	@if command -v genext2fs >/dev/null 2>&1; then \
-		echo "Creating ext2 filesystem with genext2fs..."; \
-		genext2fs -b 5120 -d $(FSDIR) -L FREEZE $@; \
+	@dd if=/dev/zero of=$@ bs=1M count=10 2>/dev/null || true
+	@if command -v mkfs.fat >/dev/null 2>&1; then \
+		echo "Creating FAT32 filesystem..."; \
+		mkfs.fat -F 32 -n FREEZE $@ >/dev/null; \
 	else \
-		echo "genext2fs not found. Install it for a proper filesystem:"; \
-		echo "  sudo apt install genext2fs"; \
-		echo "Creating blank disk image as fallback..."; \
-		dd if=/dev/zero of=$@ bs=1M count=10 2>/dev/null || true; \
+		echo "mkfs.fat not found. Install dosfstools for host-side FAT32 formatting:"; \
+		echo "  sudo apt install dosfstools"; \
+		echo "Kernel will auto-format the image to FAT32 on first boot."; \
+	fi
+	@if command -v mcopy >/dev/null 2>&1; then \
+		echo "Populating FAT32 image from fs-staging..."; \
+		MTOOLS_SKIP_CHECK=1 mcopy -i $@ -s $(FSDIR)/* ::/ 2>/dev/null || true; \
+	else \
+		echo "mtools not found (optional). Install it to pre-populate files:"; \
+		echo "  sudo apt install mtools"; \
 	fi
 
 run: freeze.iso freeze.img
