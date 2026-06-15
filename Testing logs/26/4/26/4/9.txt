@@ -117,22 +117,5 @@ Type 'help' for help on learning commands
 --------------------------------
 Currently: Version 0.64
 Freeze-OS> ls
-[EXT2] Root directory:
-.
-..
-lost+found
-media
-lib
-home
-mnt
-bin
-.dirs
-tmp
-etc
-root
-var
-.files
-opt
-boot
-usr
+[Removed as its outdated]
 Freeze-OS> 
